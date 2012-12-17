@@ -11,7 +11,10 @@
 #
 
 class Folder < ActiveRecord::Base
-  acts_as_tree2 :order => 'name'
+ 
+  acts_as_tree :order => "name"
+ 
+  
   
   attr_accessible :name
   

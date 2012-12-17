@@ -25,7 +25,7 @@ SampleApp::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/activatedusers', to: 'users#activated_user'
    
- #  match '/sessions',  to: 'sessions#new'
+ # match '/sessions',  to: 'sessions#new'
  # match '/', to: 'static_pages#home'
 
 
@@ -34,6 +34,14 @@ SampleApp::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'  
   match '/thankyou', to: 'static_pages#thankyou'
+  
+  
+  
+   # Nested resources
+  resources :folders, :shallow => true, :except => [:new, :create] do
+    resources :folders, :only => [:new, :create]
+    resources :files, :only => [:new, :create]
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

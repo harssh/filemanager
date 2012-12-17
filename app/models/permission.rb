@@ -14,5 +14,6 @@
 
 class Permission < ActiveRecord::Base
   belongs_to :folder
+  
   attr_accessible :can_create, :can_delete, :can_read, :can_update
 end

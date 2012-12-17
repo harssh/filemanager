@@ -1,2 +1,6 @@
-<h1>Folders#edit</h1>
-<p>Find me in app/views/folders/edit.html.erb</p>
+<% content_for :title, t(:rename_folder) -%>
+
+<h1><%= content_for :title %></h1>
+<%= form_for @folder do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+<% end %>

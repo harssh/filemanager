@@ -1,2 +1,6 @@
-<h1>Folders#new</h1>
-<p>Find me in app/views/folders/new.html.erb</p>
+<% content_for :title, t(:new_folder) -%>
+
+<h1><%= content_for :title %></h1>
+<%= form_for [@target_folder, @folder] do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+<% end %>
