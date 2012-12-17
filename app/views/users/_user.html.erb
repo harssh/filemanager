@@ -1,0 +1,17 @@
+<li>
+	
+	
+	<% if current_user.admin? && !current_user?(user) %>
+	
+	<% end %>
+	
+	<% if current_user.admin? && !current_user?(user) %>
+	   <% if user.approved == false %>
+	   <%= gravatar_for user, size: 52 %>
+	<%= link_to user.name, user %>
+	| <%= link_to "delete", user, method: :delete, data: { confirm: "You sure ?" } %>
+	    	     | <%= link_to "activate", activate_user_path(user),  data: { confirm: "You sure ?" } %>
+	   <% end %>
+	<% end %>
+</li>
+
