@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217070230) do
+ActiveRecord::Schema.define(:version => 20121218092011) do
 
   create_table "folders", :force => true do |t|
     t.string   "name"
@@ -21,17 +21,39 @@ ActiveRecord::Schema.define(:version => 20121217070230) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "permissions", :force => true do |t|
-    t.integer  "folder_id"
-    t.boolean  "can_create"
-    t.boolean  "can_read"
-    t.boolean  "can_update"
-    t.boolean  "can_delete"
+  create_table "group_users", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "permissions", ["folder_id"], :name => "index_permissions_on_folder_id"
+  create_table "permissions", :force => true do |t|
+    t.integer "folder_id"
+    t.integer "group_id"
+    t.boolean "can_create"
+    t.boolean "can_read"
+    t.boolean "can_update"
+    t.boolean "can_delete"
+  end
+
+  create_table "user_files", :force => true do |t|
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "folder_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "user_files", ["folder_id"], :name => "index_user_files_on_folder_id"
+  add_index "user_files", ["user_id"], :name => "index_user_files_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

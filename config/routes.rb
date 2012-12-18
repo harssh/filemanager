@@ -4,17 +4,11 @@ SampleApp::Application.routes.draw do
   get "folders/new"
 
   get "folders/show"
+  
 
  # get "users/new"
 
-   resources :users do
-     member do
-       get :activate,:activated_user
-     end
-   end
-    
-  resources :sessions, only: [:new, :create, :destroy]
- 
+  
       
  #   resources :sessions, only: [:new, :create, :destroy]
     
@@ -28,7 +22,7 @@ SampleApp::Application.routes.draw do
  # match '/sessions',  to: 'sessions#new'
  # match '/', to: 'static_pages#home'
 
-
+   match '/file_exists', to: 'files#exists'
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
@@ -36,7 +30,18 @@ SampleApp::Application.routes.draw do
   match '/thankyou', to: 'static_pages#thankyou'
   
   
+  # Resources
   
+   resources :users do
+     member do
+       get :activate,:activated_user
+     end
+   end
+    
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :groups, :except => :show
+  resources :files, :except => [:index, :new, :create]
+ 
    # Nested resources
   resources :folders, :shallow => true, :except => [:new, :create] do
     resources :folders, :only => [:new, :create]
